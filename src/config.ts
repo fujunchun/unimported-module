@@ -1,17 +1,17 @@
-import { ProcessedResult } from './process';
-import { readJson, writeJson } from './fs';
-import { CliArguments, Context, PackageJson } from './index';
-import glob from 'glob';
-import { promisify } from 'util';
-import { ensureArray } from './ensureArray';
-import { MapLike } from 'typescript';
-import { hasPackage } from './meta';
-import { presets } from './presets';
-import readPkgUp from 'read-pkg-up';
+import { ProcessedResult } from "./process";
+import { readJson, writeJson } from "./fs";
+import { Context, PackageJson } from "./index";
+import glob from "glob";
+import { promisify } from "util";
+import { ensureArray } from "./ensureArray";
+import { MapLike } from "typescript";
+import { hasPackage } from "./meta";
+import { presets } from "./presets";
+import readPkgUp from "read-pkg-up";
 
 const globAsync = promisify(glob);
 
-const CONFIG_FILE = '.unimportedrc.json';
+const CONFIG_FILE = ".unimportedrc.json";
 
 export interface EntryConfig {
   file: string;
@@ -52,7 +52,7 @@ export type Preset = {
   name: string;
   isMatch: (options: PresetParams) => Promise<boolean> | boolean;
   getConfig: (
-    options: PresetParams,
+    options: PresetParams
   ) => Promise<UnimportedConfig> | UnimportedConfig;
 };
 
@@ -71,7 +71,7 @@ export interface Config {
 }
 
 export async function expandGlob(
-  patterns: string | string[],
+  patterns: string | string[]
 ): Promise<string[]> {
   const set = new Set<string>();
 
@@ -95,10 +95,10 @@ export function __clearCachedConfig() {
 }
 
 export async function getPreset(
-  name?: string,
+  name?: string
 ): Promise<UnimportedConfig | undefined> {
   const packageJson =
-    (await readJson<PackageJson>('package.json')) || ({} as PackageJson);
+    (await readJson<PackageJson>("package.json")) || ({} as PackageJson);
 
   const options = {
     packageJson,
@@ -106,7 +106,7 @@ export async function getPreset(
   };
 
   const preset = presets.find(
-    (preset) => preset.name === name || preset.isMatch(options),
+    (preset) => preset.name === name || preset.isMatch(options)
   );
 
   if (!preset) {
@@ -121,25 +121,25 @@ export async function getPreset(
   };
 }
 
-export async function getConfig(args?: CliArguments): Promise<Config> {
+export async function getConfig(configFile: UnimportedConfig): Promise<Config> {
   if (cachedConfig) {
     return cachedConfig;
   }
 
-  const configFile = await readJson<Partial<UnimportedConfig>>(CONFIG_FILE);
+  // const configFile = await readJson<Partial<UnimportedConfig>>(CONFIG_FILE);
   const unimportedPkg = await readPkgUp({ cwd: __dirname });
 
   const preset = await getPreset(configFile?.preset);
 
   const config: Config = {
-    version: unimportedPkg?.packageJson.version || 'unknown',
+    version: unimportedPkg?.packageJson.version || "unknown",
     preset: preset?.preset,
-    flow: args?.flow ?? configFile?.flow ?? preset?.flow ?? false,
+    flow: false, // no flow
     rootDir: configFile?.rootDir ?? preset?.rootDir,
     ignoreUnresolved:
       configFile?.ignoreUnresolved ?? preset?.ignoreUnresolved ?? [],
     ignoreUnimported: await expandGlob(
-      configFile?.ignoreUnimported ?? preset?.ignoreUnimported ?? [],
+      configFile?.ignoreUnimported ?? preset?.ignoreUnimported ?? []
     ),
     ignoreUnused: configFile?.ignoreUnused ?? preset?.ignoreUnused ?? [],
     ignorePatterns: configFile?.ignorePatterns ?? preset?.ignorePatterns ?? [],
@@ -155,13 +155,13 @@ export async function getConfig(args?: CliArguments): Promise<Config> {
   if (entryFiles.length === 0) {
     throw new Error(
       `Unable to locate entry points for this ${
-        preset?.preset ?? ''
-      } project. Please declare them in package.json or .unimportedrc.json`,
+        preset?.preset ?? ""
+      } project. Please declare them in package.json or .unimportedrc.json`
     );
   }
 
   for (const entry of entryFiles) {
-    if (typeof entry === 'string') {
+    if (typeof entry === "string") {
       for (const file of await expandGlob(entry)) {
         config.entryFiles.push({
           file,
@@ -198,7 +198,7 @@ export async function getConfig(args?: CliArguments): Promise<Config> {
   for (const entryFile of config.entryFiles) {
     for (const extension of entryFile.extensions) {
       // pop the last part, so that .server.js merges with .js
-      uniqExtensions.add('.' + extension.split('.').pop());
+      uniqExtensions.add("." + extension.split(".").pop());
     }
   }
 
@@ -226,7 +226,7 @@ export async function writeConfig(config: Partial<Config>) {
 
 export async function updateAllowLists(
   files: ProcessedResult,
-  context: Context,
+  context: Context
 ) {
   const cfg = context.config;
 

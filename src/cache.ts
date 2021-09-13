@@ -1,14 +1,14 @@
 import fileEntryCache, {
   FileDescriptor,
   FileEntryCache,
-} from 'file-entry-cache';
-import { Cache } from 'flat-cache';
-import { log } from './log';
-import path from 'path';
-import { rmSync } from 'fs';
-import { EntryConfig } from './config';
+} from "file-entry-cache";
+import { Cache } from "flat-cache";
+import { log } from "./log";
+import path from "path";
+import { rmSync } from "fs";
+import { EntryConfig } from "./config";
 
-type CacheMeta<T> = FileDescriptor['meta'] & { data: T };
+type CacheMeta<T> = FileDescriptor["meta"] & { data: T };
 
 // we keep cache groups per entry file, to keep the cache free from override conflicts
 const caches: Record<string, FileEntryCache> = {};
@@ -31,7 +31,7 @@ function getCache(identity: string) {
 
   caches[identity] = fileEntryCache.create(
     identity,
-    path.resolve(process.cwd(), './node_modules/.cache/unimported'),
+    path.resolve(process.cwd(), "./node_modules/.cache/unimported")
   );
 
   return caches[identity];
@@ -54,7 +54,7 @@ export class InvalidCacheError extends Error {
 
   constructor(message: string, path: string) {
     super(message);
-    this.name = 'InvalidCacheError';
+    this.name = "InvalidCacheError";
     this.path = path;
   }
 }
@@ -62,7 +62,7 @@ export class InvalidCacheError extends Error {
 export async function resolveEntry<T>(
   path: string,
   generator: () => Promise<T>,
-  cacheIdentity = '*',
+  cacheIdentity = "*"
 ): Promise<T> {
   const cacheEntry = getCache(cacheIdentity).getFileDescriptor(path);
   const meta: CacheMeta<T> = cacheEntry.meta as CacheMeta<T>;
@@ -96,7 +96,7 @@ export function invalidateEntries<T>(shouldRemove: (meta: T) => boolean): void {
 }
 
 export function storeCache(): void {
-  log.info('store cache');
+  log.info("store cache");
 
   for (const key of Object.keys(caches)) {
     caches[key].reconcile();
@@ -104,10 +104,13 @@ export function storeCache(): void {
 }
 
 export function purgeCache(): void {
-  log.info('purge cache');
+  log.info("purge cache");
 
-  rmSync(path.resolve(process.cwd(), './node_modules/.cache/unimported'), {
-    recursive: true,
-    force: true,
-  });
+  rmSync(
+    path.resolve(process.cwd(), "./node_modules/.cache/unimported-module"),
+    {
+      recursive: true,
+      force: true,
+    }
+  );
 }
