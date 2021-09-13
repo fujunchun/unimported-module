@@ -1,6 +1,6 @@
 # unimported-module
 
-based on unimported
+based on unimported([https://github.com/smeijer/unimported](https://github.com/smeijer/unimported))
 
 **Find unused source files in javascript / typescript projects.**
 
@@ -99,4 +99,4 @@ To ignore specific results, add them to `.unimportedrc.json#ignoreUnimported`.
 
 ## License
 
-[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/smeijer/unimported/blob/main/LICENSE)
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/fujunchun/unimported-module/blob/main/LICENSE)
