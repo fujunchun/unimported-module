@@ -1,6 +1,6 @@
 {
   "name": "unimported-module",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Scans your nodejs project folder and shows obsolete files and modules",
   "main": "./dist/index.js",
   "source": "./src/index.ts",
@@ -21,7 +21,7 @@
     "bump:patch": "npm version patch -m 'release: cut the %s release'",
     "bump:minor": "npm version minor -m 'release: cut the %s release'",
     "bump:major": "npm version major -m 'release: cut the %s release'",
-    "postinstall": "husky install && patch-package",
+    "_postinstall": "husky install && patch-package",
     "prepublishOnly": "pinst --disable",
     "postpublish": "pinst --enable"
   },
