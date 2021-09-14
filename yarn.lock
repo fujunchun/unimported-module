@@ -4864,6 +4864,28 @@ undefsafe@^2.0.3:
   dependencies:
     debug "^2.2.0"
 
+unimported-module@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/unimported-module/-/unimported-module-0.1.0.tgz#2f118dabaa77578e55529aac3e9414c1e6bc9615"
+  integrity sha512-P3XT7vq68fB6D5cdrO7Ezso+4xihFwKaseTakVVwolCrqSjtx+9zAXGN4eeb/6+9j04pS0Kqd/MOgxA/ju+ttA==
+  dependencies:
+    "@typescript-eslint/parser" "^4.28.1"
+    "@typescript-eslint/typescript-estree" "^4.28.1"
+    chalk "^4.1.0"
+    debug "^4.3.2"
+    eslint "^7.20.0"
+    file-entry-cache "^6.0.1"
+    flow-remove-types "^2.145.0"
+    glob "^7.1.6"
+    json5 "^2.2.0"
+    ora "^5.3.0"
+    read-pkg-up "^7.0.1"
+    resolve "^1.20.0"
+    simple-git "^2.38.0"
+    term-size "^2.2.1"
+    typescript "^4.3.5"
+    yargs "^16.2.0"
+
 union-value@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/union-value/-/union-value-1.0.1.tgz#0b6fe7b835aecda61c6ea4d4f02c14221e109847"

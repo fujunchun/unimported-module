@@ -85,15 +85,13 @@ export default async function main(
 
   const cwd = process.cwd();
 
-  console.log("cwd:", cwd);
+  console.log("unimported cwd:", cwd);
 
   // clear cache
   purgeCache();
 
   try {
     const config = await getConfig(unimportedConfig);
-
-    console.log("config:", config);
 
     // args.showConfig
     // args.showPreset
@@ -129,7 +127,7 @@ export default async function main(
         dependencies,
       };
 
-      console.log("entry file:", path.resolve(entry.file));
+      // console.log("entry file:", path.resolve(entry.file));
       // we can't use the third argument here, to keep feeding to traverseResult
       // as that would break the import alias overrides. A client-entry file
       // can resolve `create-api` as `create-api-client.js` while server-entry
@@ -191,8 +189,6 @@ export default async function main(
       traverseResult,
       context
     );
-
-    console.log("result:", result);
 
     return result;
   } catch (error) {

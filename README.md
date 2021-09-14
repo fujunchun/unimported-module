@@ -1,10 +1,12 @@
 # unimported-module
 
-based on unimported([https://github.com/smeijer/unimported](https://github.com/smeijer/unimported))
+forked from unimported([https://github.com/smeijer/unimported](https://github.com/smeijer/unimported))
+
+`unimported` is a cli tool, modify the entry file, so we can import it as a module.
+
+if get something unclear, you can look at [unimported](https://github.com/smeijer/unimported)
 
 **Find unused source files in javascript / typescript projects.**
-
-![screenshot of unimported results](./docs/unimported.png)
 
 While adding new code to our projects, we might forget to remove the old code. Linters warn us for unused code in a module, but they fail to report unused files.
 

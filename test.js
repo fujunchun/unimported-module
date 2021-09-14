@@ -1,4 +1,4 @@
-const unimportedTool = require("./dist/index.js");
+const unimportedTool = require("unimported-module");
 
 // const { unimported } =  unimportedTool.default({});
 

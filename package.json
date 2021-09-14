@@ -1,17 +1,14 @@
 {
-  "name": "unimported",
-  "version": "0.1.0",
+  "name": "unimported-module",
+  "version": "0.1.1",
   "description": "Scans your nodejs project folder and shows obsolete files and modules",
   "main": "./dist/index.js",
-  "bin": {
-    "unimported": "bin/unimported.js"
-  },
   "source": "./src/index.ts",
   "license": "MIT",
-  "author": "Stephan Meijer <stephan@meijer.ws>",
+  "author": "fujunchun <fujunchun2021@163.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/smeijer/unimported.git"
+    "url": "git+https://github.com/fujunchun/unimported-module.git"
   },
   "scripts": {
     "build": "rimraf ./dist && tsc",
@@ -55,6 +52,7 @@
     "simple-git": "^2.38.0",
     "term-size": "^2.2.1",
     "typescript": "^4.3.5",
+    "unimported-module": "^0.1.0",
     "yargs": "^16.2.0"
   },
   "devDependencies": {
