@@ -27,7 +27,7 @@ yarn add unimported-module
 ```
 
 ```
-const unimported = require('unimported-module')
+const {unimported} = require('unimported-module')
 const config = {
 entry: ['./src/index.ts']
 }
