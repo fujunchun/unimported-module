@@ -4,7 +4,7 @@ forked from unimported([https://github.com/smeijer/unimported](https://github.co
 
 `unimported` is a cli tool, modify the entry file, so we can import it as a module.
 
-if get something unclear, you can look at [unimported](https://github.com/smeijer/unimported)
+if get something unclear or want a cli, you can look at [unimported](https://github.com/smeijer/unimported)
 
 **Find unused source files in javascript / typescript projects.**
 
@@ -17,11 +17,22 @@ The result is a report showing which files are unimported, which dependencies ar
 ## usage
 
 ```
-const unimported = require('unimported-module')
+npm install unimported-module
+```
 
-unimported({
+or
+
+```
+yarn add unimported-module
+```
+
+```
+const unimported = require('unimported-module')
+const config = {
 entry: ['./src/index.ts']
-}).then(({unresolved,unused,unimported }) => {
+}
+
+unimported(config).then(({unresolved,unused,unimported }) => {
 
 })
 ```
@@ -95,9 +106,7 @@ To ignore specific results, add them to `.unimportedrc.json#ignoreUnused`.
 
 The files listed under `unimported files`, are the files that exist in your code base, but are not part of your final bundle. It should be safe to delete those files.
 
-For your convenience, some files are not shown, as we treat those as 'dev only' files which you might need. More about that [below](#how).
-
-To ignore specific results, add them to `.unimportedrc.json#ignoreUnimported`.
+For your convenience, some files are not shown, as we treat those as 'dev only' files which you might need.
 
 ## License
 
