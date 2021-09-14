@@ -1,6 +1,6 @@
-// const unimportedTool = require("unimported-module");
+const { unimported } = require("unimported-module");
 
-const { unimported } = require("./dist/index");
+// const { unimported } = require("./dist/index");
 
 unimported({
   entry: ["./src/index.ts"],
