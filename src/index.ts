@@ -77,7 +77,7 @@ const oraStub = {
   },
 };
 
-export default async function main(
+export async function unimported(
   unimportedConfig: UnimportedConfig
 ): Promise<ProcessedResult | void> {
   // const projectPkg = await readPkgUp({ cwd: args.cwd });
