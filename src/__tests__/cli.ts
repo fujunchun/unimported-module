@@ -1,4 +1,5 @@
 import fs, { existsSync } from 'fs';
+import rimraf from "rimraf";
 import path from 'path';
 import util from 'util';
 import cases from 'jest-in-case';
@@ -14,7 +15,12 @@ const rmdir = util.promisify(fs.rm);
 const readFile = util.promisify(fs.readFile);
 
 afterAll(() => {
-  fs.rmSync('.test-space', { recursive: true });
+  // 兼容 Node < 14
+  if (typeof fs.rmSync === 'function') {
+    fs.rmSync('.test-space', { recursive: true });
+  } else {
+    rimraf.sync('.test-space')
+  }  
 });
 
 jest.mock('simple-git');

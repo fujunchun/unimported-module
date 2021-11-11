@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs';
+import rimraf from "rimraf";
 import { mkdir, writeFile } from 'fs/promises';
 
 export async function createTestProject(
@@ -61,6 +62,11 @@ export async function runWithFiles<T extends (...args: any) => any>(
     return await cb();
   } finally {
     process.chdir(originalCwd);
-    fs.rmSync(testPath, { recursive: true, force: true });
+    if (typeof fs.rmSync === 'function') {
+      fs.rmSync(testPath, { recursive: true, force: true });
+    } else {
+      rimraf.sync(testPath)
+    }
+    
   }
 }

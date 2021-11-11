@@ -1,6 +1,6 @@
 {
   "name": "unimported-module",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Scans your nodejs project folder and shows obsolete files and modules",
   "main": "./dist/index.js",
   "source": "./src/index.ts",

@@ -1,4 +1,5 @@
 import fs from 'fs';
+import rimraf from "rimraf";
 import path from 'path';
 import { exists, readText, writeText, readJson, writeJson, list } from '../fs';
 
@@ -9,7 +10,12 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  fs.rmSync(testSpaceDir, { recursive: true });
+  if (typeof fs.rmSync === 'function') {
+    fs.rmSync(testSpaceDir, { recursive: true });
+  } else {
+    rimraf.sync(testSpaceDir)
+  }
+  
 });
 
 test('should check if file exists', async () => {

@@ -6,6 +6,7 @@ import { Cache } from "flat-cache";
 import { log } from "./log";
 import path from "path";
 import { rmSync } from "fs";
+import rimraf from "rimraf";
 import { EntryConfig } from "./config";
 
 type CacheMeta<T> = FileDescriptor["meta"] & { data: T };
@@ -106,11 +107,17 @@ export function storeCache(): void {
 export function purgeCache(): void {
   log.info("purge cache");
 
-  rmSync(
-    path.resolve(process.cwd(), "./node_modules/.cache/unimported-module"),
-    {
-      recursive: true,
-      force: true,
-    }
-  );
+  // 兼容 Node < 14
+  if (typeof rmSync === 'function') {
+    rmSync(
+      path.resolve(process.cwd(), "./node_modules/.cache/unimported-module"),
+      {
+        recursive: true,
+        force: true,
+      }
+    );
+  } else {
+    rimraf.sync(path.resolve(process.cwd(), "./node_modules/.cache/unimported-module"))
+  }
+  
 }
